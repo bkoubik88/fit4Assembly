@@ -21,7 +21,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import EditIcon from "@material-ui/icons/Edit";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -34,15 +33,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InteractiveList({ durchlauf }) {
+export default function InteractiveList({ plaene }) {
   const classes = useStyles();
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(true);
   const [suche, setSuche] = React.useState("");
-  const [filter, setFilter] = React.useState(durchlauf.aufgaben);
+  const [filter, setFilter] = React.useState(plaene);
 
   const onChange = (event) => {
-    let d = durchlauf.aufgaben.filter((aufgabe) => {
+    let d = plaene.titel.filter((aufgabe) => {
       return aufgabe.toLowerCase().includes(event.target.value.toLowerCase());
     });
 
@@ -53,7 +52,7 @@ export default function InteractiveList({ durchlauf }) {
     <Row className="justify-content-center">
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
         <Typography variant="h6" className={classes.title}>
-          Alle Aufgaben
+          Alle Pläne
         </Typography>
       </Col>
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
@@ -73,8 +72,8 @@ export default function InteractiveList({ durchlauf }) {
               value={suche}
               style={{ marginBottom: "5%" }}
               onChange={(e) => {
-                const test = durchlauf.aufgaben.filter((aufgabe) => {
-                  return aufgabe.title
+                const test = plaene.titel.filter((aufgabe) => {
+                  return plaene.titel
                     .toString()
                     .toLowerCase()
                     .includes(e.target.value.toLowerCase());
@@ -84,7 +83,7 @@ export default function InteractiveList({ durchlauf }) {
                 setSuche(e.target.value);
               }}
             />
-            {filter.map((aufgabe, index) => {
+            {filter.map((plan, index) => {
               return (
                 <>
                   <ListItem>
@@ -94,8 +93,8 @@ export default function InteractiveList({ durchlauf }) {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={`${aufgabe.title}`}
-                      secondary={`${aufgabe.beschreibung}`}
+                      primary={`${plan.titel}`}
+                      secondary={`${plan.ersteller}`}
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">

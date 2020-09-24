@@ -34,15 +34,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InteractiveList({ durchlauf }) {
+export default function InteractiveList({ gruppen }) {
   const classes = useStyles();
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(true);
   const [suche, setSuche] = React.useState("");
-  const [filter, setFilter] = React.useState(durchlauf.aufgaben);
+  const [filter, setFilter] = React.useState(gruppen);
 
   const onChange = (event) => {
-    let d = durchlauf.aufgaben.filter((aufgabe) => {
+    let d = gruppen.filter((aufgabe) => {
       return aufgabe.toLowerCase().includes(event.target.value.toLowerCase());
     });
 
@@ -53,7 +53,7 @@ export default function InteractiveList({ durchlauf }) {
     <Row className="justify-content-center">
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
         <Typography variant="h6" className={classes.title}>
-          Alle Aufgaben
+          Alle Gruppen
         </Typography>
       </Col>
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
@@ -73,8 +73,8 @@ export default function InteractiveList({ durchlauf }) {
               value={suche}
               style={{ marginBottom: "5%" }}
               onChange={(e) => {
-                const test = durchlauf.aufgaben.filter((aufgabe) => {
-                  return aufgabe.title
+                const test = gruppen.filter((aufgabe) => {
+                  return aufgabe.name
                     .toString()
                     .toLowerCase()
                     .includes(e.target.value.toLowerCase());
@@ -84,7 +84,7 @@ export default function InteractiveList({ durchlauf }) {
                 setSuche(e.target.value);
               }}
             />
-            {filter.map((aufgabe, index) => {
+            {filter.map((gruppe, index) => {
               return (
                 <>
                   <ListItem>
@@ -94,8 +94,8 @@ export default function InteractiveList({ durchlauf }) {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={`${aufgabe.title}`}
-                      secondary={`${aufgabe.beschreibung}`}
+                      primary={`${gruppe.name}`}
+                      secondary={`${gruppe.aktiv}`}
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">

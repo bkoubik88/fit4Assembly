@@ -9,6 +9,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import TimelapseIcon from "@material-ui/icons/Timelapse";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 const useStyles = makeStyles((theme) => ({
   speedDial: {
     position: "fixed",
@@ -35,6 +36,10 @@ export default function OpenIconSpeedDial({ welcherDialogOffnen }) {
       icon: <PlaylistAddIcon onClick={() => welcherDialog("Aufgabe")} />,
       name: "Neue Aufgabe",
     },
+    {
+      icon: <GroupAddIcon onClick={() => welcherDialog("Gruppe")} />,
+      name: "Neue Gruppe",
+    },
   ];
 
   const welcherDialog = (art) => {
@@ -42,8 +47,10 @@ export default function OpenIconSpeedDial({ welcherDialogOffnen }) {
       welcherDialogOffnen("Durchlauf");
     } else if (art === "Plan") {
       welcherDialogOffnen("Plan");
-    } else {
+    } else if (art === "Aufgabe") {
       welcherDialogOffnen("Aufgabe");
+    } else {
+      welcherDialogOffnen("Gruppe");
     }
   };
 

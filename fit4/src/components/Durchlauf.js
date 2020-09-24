@@ -39,7 +39,7 @@ export default function InteractiveList({ durchlauf }) {
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(true);
   const [suche, setSuche] = React.useState("");
-  const [filter, setFilter] = React.useState(durchlauf.aufgaben);
+  const [filter, setFilter] = React.useState(durchlauf.plaene);
 
   const onChange = (event) => {
     let d = durchlauf.aufgaben.filter((aufgabe) => {
@@ -53,7 +53,7 @@ export default function InteractiveList({ durchlauf }) {
     <Row className="justify-content-center">
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
         <Typography variant="h6" className={classes.title}>
-          Alle Aufgaben
+          Alle Durchläufe
         </Typography>
       </Col>
       <Col md={12} xs={12} style={{ textAlign: "center" }}>
@@ -95,7 +95,7 @@ export default function InteractiveList({ durchlauf }) {
                     </ListItemAvatar>
                     <ListItemText
                       primary={`${aufgabe.title}`}
-                      secondary={`${aufgabe.beschreibung}`}
+                      secondary={`Aufgaben: ${aufgabe.aufgaben}`}
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">

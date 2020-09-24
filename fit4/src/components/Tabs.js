@@ -9,6 +9,13 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import NeueAufgabe from "./NeueAufgabe";
 import Aufgaben from "./Aufgaben";
+import NeueGruppe from "./NeueGruppe";
+import Gruppen from "./Gruppen";
+import Plaene from "./Plaene";
+import NeuerPlan from "./NeuerPlan";
+
+import Durchlauf from "./Durchlauf";
+import NeuerDurchlauf from "./NeuerDurchlauf";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FullWidthTabs({ durchlauf }) {
+export default function FullWidthTabs({ durchlauf, gruppen, plaene, durch }) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -63,30 +70,119 @@ export default function FullWidthTabs({ durchlauf }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
+      {durchlauf && (
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Neue Aufgabe" {...a11yProps(0)} />
+            <Tab label="Alle Aufgaben" {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+      )}
+      {durchlauf && (
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
         >
-          <Tab label="Neue Aufgabe" {...a11yProps(0)} />
-          <Tab label="Alle Aufgaben" {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <NeueAufgabe></NeueAufgabe>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <Aufgaben durchlauf={durchlauf}></Aufgaben>
-        </TabPanel>
-      </SwipeableViews>
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <NeueAufgabe></NeueAufgabe>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Aufgaben durchlauf={durchlauf}></Aufgaben>
+          </TabPanel>
+        </SwipeableViews>
+      )}
+
+      {gruppen && (
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Neue Gruppe" {...a11yProps(0)} />
+            <Tab label="Alle Gruppen" {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+      )}
+      {gruppen && (
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <NeueGruppe></NeueGruppe>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Gruppen gruppen={gruppen}></Gruppen>
+          </TabPanel>
+        </SwipeableViews>
+      )}
+      {plaene && (
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Neuer Plan" {...a11yProps(0)} />
+            <Tab label="Alle Plaene" {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+      )}
+      {plaene && (
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <NeuerPlan></NeuerPlan>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Plaene plaene={plaene}></Plaene>
+          </TabPanel>
+        </SwipeableViews>
+      )}
+      {durch && (
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Neuer Plan" {...a11yProps(0)} />
+            <Tab label="Alle Plaene" {...a11yProps(1)} />
+          </Tabs>
+        </AppBar>
+      )}
+      {durch && (
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <NeuerDurchlauf></NeuerDurchlauf>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Durchlauf durchlauf={durch}></Durchlauf>
+          </TabPanel>
+        </SwipeableViews>
+      )}
     </div>
   );
 }

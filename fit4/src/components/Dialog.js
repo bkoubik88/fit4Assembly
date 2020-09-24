@@ -44,6 +44,8 @@ export default function FullScreenDialog({
   art,
   dialogOffnen,
   durchlauf,
+  gruppen,
+  plaene,
 }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(offnen);
@@ -81,6 +83,9 @@ export default function FullScreenDialog({
 
         <Container>
           {art === "Aufgabe" && <Tabs durchlauf={durchlauf}></Tabs>}
+          {art === "Gruppe" && <Tabs gruppen={gruppen}></Tabs>}
+          {art === "Plan" && <Tabs plaene={plaene}></Tabs>}
+          {art === "Durchlauf" && <Tabs durch={durchlauf}></Tabs>}
         </Container>
       </Dialog>
     </div>
